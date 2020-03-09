@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.iqv.demo.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:name="com.iqv.demo.ui.banner.BannerAdFragment"
+        android:label="@string/title_banner"
+        tools:layout="@layout/fragment_banner" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
