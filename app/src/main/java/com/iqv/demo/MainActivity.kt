@@ -8,7 +8,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.iqv.AdSdk
-import com.iqv.AdSdk.InitialisationListener
 import com.iqv.utils.Logger
 
 class MainActivity : AppCompatActivity() {

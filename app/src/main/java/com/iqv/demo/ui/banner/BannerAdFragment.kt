@@ -17,7 +17,7 @@ import com.iqv.views.PNAdView
 class BannerAdFragment : Fragment(), PNAdView.Listener {
     val TAG = BannerAdFragment::class.java.simpleName
     private lateinit var bannerAdViewModel: BannerAdViewModel
-    private lateinit var pBanner: BannerAdView
+    private lateinit var banner: BannerAdView
     private lateinit var loadButton: Button
 
     override fun onCreateView(
@@ -38,7 +38,7 @@ class BannerAdFragment : Fragment(), PNAdView.Listener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadButton = view.findViewById(R.id.button_load)
-        pBanner = view.findViewById(R.id.p_banner)
+        banner = view.findViewById(R.id.banner)
 
         loadButton.setOnClickListener {
             loadAd()
@@ -46,7 +46,7 @@ class BannerAdFragment : Fragment(), PNAdView.Listener {
     }
 
     fun loadAd() {
-        pBanner.load(this)
+        banner.load(this)
     }
 
     // --------------- PNAdView Listener --------------------
@@ -64,5 +64,12 @@ class BannerAdFragment : Fragment(), PNAdView.Listener {
 
     override fun onAdLoaded() {
         Log.d(TAG, "onAdLoaded")
+    }
+
+    override fun onDestroy() {
+        if (banner != null) {
+            banner.destroy()
+        }
+        super.onDestroy()
     }
 }

@@ -31,7 +31,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.iqv.views.BannerAdView
-        android:id="@+id/p_banner"
+        android:id="@+id/banner"
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
