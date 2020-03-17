@@ -3,7 +3,7 @@
 ## Requirements
 - You will be provided with a parameter set by your account manager. This consists of two string values for appToken and partnerKeyword.
 
-## Install using Gradle
+## Install using Gradle dependency
 
 Add PubNative Maven repo to your project level build.gradle file:
 
@@ -33,6 +33,13 @@ dependencies {
    implementation 'com.iqv:iqv.adsdk:+'
 }
 ```
+
+## Install as a manual dependency
+
+You can download the most recent .aar file of IQV SDK from our bintray repository:
+https://bintray.com/pubnative/maven/iqv.adsdk.beta/#files/com%2Fiqv%2Fiqv.adsdk%2F0.8.1-verve.1521
+
+Place this file in your project and add it as a dependency.
 
 ## Manifest permissions
 
@@ -103,10 +110,12 @@ AdSdk.setKeywords("sports,racket,tennis")
 
 ### Create XML Layout
 
+**Please note: The class name of the AdView has changed from previous IQV SDK versions. Please only use com.iqv.views.AdView in your project**
+
 Create a BannerAdView inside your layout file
 
 ```
-<com.iqv.views.BannerAdView
+<com.iqv.views.AdView
         android:id="@+id/p_banner"
         android:layout_width="320dp"
         android:layout_height="50dp"
@@ -120,7 +129,7 @@ Create a BannerAdView inside your layout file
 Create an attribute to hold the reference to the UI element.
 
 ```
-private BannerAdView banner;
+private AdView banner;
 ```
 
 Get a reference to it from your code.
@@ -130,11 +139,14 @@ Get a reference to it from your code.
 ```
 
 ### Requesting and displaying the ad
-Use the load method to request an ad using the zone id and setting a listener for the banner.
+Use the load method to request an ad. You can set a listener for the banner.
+Before loading you can define the desired size. Various banner and MRECT formats are supported.
 
 ```
 private void loadBanner() {
-    mBanner.load(new PNAdView.Listener() {
+    // supported sizes are currently 300x250, 320x50, 320x100, 728x90
+    mBanner.setAdSize(AdSize.SIZE_320x50)
+    mBanner.load(new AdView.Listener() {
         @Override
         public void onAdLoaded() {
 
@@ -158,8 +170,15 @@ private void loadBanner() {
 }
 ```
 
-Once the ad is loaded successfully from the server, the PNBannerAdView will render it and notify when it's ready via the onAdLoaded callback. Any error during fetch or rendering will be received via the onAdLoadFailed callback.
+Once the ad is loaded successfully from the server, the onAdLoaded() function will be called.
+Any error during fetch or rendering will be received via the onAdLoadFailed callback.
 onAdImpression and onAdClick just notify of clicks and impressions. No code needs to be added there. Use those callbacks in case you want to hide the ad after click or some similar use case.
+
+Now you can show the ad by calling
+```
+ banner.show();
+```
+
 Finally destroy the banner when the activity or fragment are destroyed.
 
 ```

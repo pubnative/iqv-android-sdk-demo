@@ -1,4 +1,4 @@
-package com.iqv.demo.ui.banner
+package com.iqv.demo.ui.mrect
 
 import android.os.Bundle
 import android.util.Log
@@ -12,9 +12,10 @@ import com.iqv.demo.R
 import com.iqv.models.AdSize
 import com.iqv.views.AdView
 
-class BannerAdFragment : Fragment(), AdView.Listener {
-    val TAG = BannerAdFragment::class.java.simpleName
-    private lateinit var bannerAdViewModel: BannerAdViewModel
+class MRectFragment : Fragment(), AdView.Listener {
+
+    val TAG = MRectFragment::class.java.simpleName
+    private lateinit var mrectViewModel: MRectViewModel
     private lateinit var banner: AdView
     private lateinit var loadButton: Button
 
@@ -23,15 +24,15 @@ class BannerAdFragment : Fragment(), AdView.Listener {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        bannerAdViewModel =
-                ViewModelProviders.of(this).get(BannerAdViewModel::class.java)
-        return inflater.inflate(R.layout.fragment_banner, container, false)
+        mrectViewModel =
+                ViewModelProviders.of(this).get(MRectViewModel::class.java)
+        return inflater.inflate(R.layout.fragment_mrect, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadButton = view.findViewById(R.id.button_load)
-        banner = view.findViewById(R.id.banner)
+        banner = view.findViewById(R.id.mrect)
 
         loadButton.setOnClickListener {
             loadAd()
@@ -40,7 +41,7 @@ class BannerAdFragment : Fragment(), AdView.Listener {
 
     fun loadAd() {
         // supported sizes are currently 300x250, 320x50, 320x100, 728x90
-        banner.setAdSize(AdSize.SIZE_320x50)
+        banner.setAdSize(AdSize.SIZE_300x250)
         banner.load(this)
     }
 
