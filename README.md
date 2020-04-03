@@ -140,13 +140,13 @@ Create a BannerAdView inside your layout file
 Create an attribute to hold the reference to the UI element.
 
 ``` Kotlin
-private AdView banner;
+private lateinit var banner: AdView
 ```
 
 Get a reference to it from your code.
 
 ``` Kotlin
-        banner = view.findViewById(R.id.banner)
+        banner = view.findViewById(R.id.p_banner)
 ```
 
 ### Requesting and displaying the ad
@@ -154,30 +154,26 @@ Use the load method to request an ad. You can set a listener for the banner.
 Before loading you can define the desired size. Various banner and MRECT formats are supported.
 
 ``` Kotlin
-private void loadBanner() {
+private fun loadBanner() {
     // supported sizes are currently 300x250, 320x50, 320x100, 728x90
-    mBanner.setAdSize(AdSize.SIZE_320x50)
-    mBanner.load(new AdView.Listener() {
-        @Override
-        public void onAdLoaded() {
+    banner.setAdSize(AdSize.SIZE_320x50)
+    banner.load(object : AdView.Listener {
+        override fun onAdLoaded() {
 
         }
 
-        @Override
-        public void onAdLoadFailed(Throwable error) {
+        override fun onAdImpression() {
 
         }
 
-        @Override
-        public void onAdImpression() {
+        override fun onAdLoadFailed(p0: Throwable?) {
 
         }
 
-        @Override
-        public void onAdClick() {
+        override fun onAdClick() {
 
         }
-    });
+    })
 }
 ```
 
@@ -187,17 +183,81 @@ onAdImpression and onAdClick just notify of clicks and impressions. No code need
 
 Now you can show the ad by calling
 ``` Kotlin
- banner.show();
+banner.show()
 ```
 
 Finally destroy the banner when the activity or fragment are destroyed.
 
 ``` Kotlin
 override fun onDestroy() {
-        if (banner != null) {
-            banner.destroy()
-        }
-        super.onDestroy()
+    if (banner != null) {
+        banner.destroy()
     }
+    super.onDestroy()
+}
 ```
 
+## IQV Android SDK - Interstitials
+
+### Create **InterstitialAd** attribute in you activity or fragment
+
+``` Kotlin
+private lateinit var interstitial : InterstitialAd;
+```
+
+### Request the ad
+
+Create an instance of the interstitial object setting a **listener**. Use the **load** method to make an ad request.
+
+``` Kotlin
+private fun loadInterstitial() {
+    interstitial = InterstitialAd(this, object : InterstitialAd.Listener {
+        override fun onInterstitialLoaded() {
+
+        }
+
+        override fun onInterstitialLoadFailed(error: Throwable?) {
+
+        }
+
+        override fun onInterstitialImpression() {
+
+        }
+
+        override fun onInterstitialClick() {
+
+        }
+
+        override fun onInterstitialDismissed() {
+
+        }
+    })
+    interstitial.load()
+}
+```
+
+After the ad is successfully retrieved from the server, the **onInterstitialLoaded** callback will notify that the ad is ready to be displayed.
+You can display the interstitial as soon as it's loaded using after getting the callback. Use the **show** method to display the ad:
+
+``` Kotlin
+interstitial.show();
+```
+
+if you don't want to show the ad right away after being loaded, you can use the **isReady** method that returns a boolean stating if the ad has been loaded and is ready to be displayed.
+
+``` Kotlin
+if (interstitial.isReady()) {
+    interstitial.show()
+}
+```
+
+Finally destroy the interstitial when the activity or fragment are destroyed
+
+``` Kotlin
+override fun onDestroy() {
+    if (interstitial != null) {
+        interstitial.destroy()
+    }
+    super.onDestroy()
+}
+```

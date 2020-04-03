@@ -1,21 +1,19 @@
-package com.iqv.demo.ui.mrect
+package com.iqv.demo.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import com.iqv.demo.R
 import com.iqv.models.AdSize
+import com.iqv.utils.Logger
 import com.iqv.views.AdView
 
-class MRectFragment : Fragment(), AdView.Listener {
+class MRectAdFragment : Fragment(), AdView.Listener {
 
-    val TAG = MRectFragment::class.java.simpleName
-    private lateinit var mrectViewModel: MRectViewModel
+    val TAG = MRectAdFragment::class.java.simpleName
     private lateinit var banner: AdView
     private lateinit var loadButton: Button
 
@@ -23,11 +21,7 @@ class MRectFragment : Fragment(), AdView.Listener {
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View? {
-        mrectViewModel =
-                ViewModelProviders.of(this).get(MRectViewModel::class.java)
-        return inflater.inflate(R.layout.fragment_mrect, container, false)
-    }
+    ) = inflater.inflate(R.layout.fragment_mrect, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,21 +39,21 @@ class MRectFragment : Fragment(), AdView.Listener {
         banner.load(this)
     }
 
-    // --------------- PNAdView Listener --------------------
+    // --------------- AdView Listener --------------------
     override fun onAdImpression() {
-        Log.d(TAG, "onAdImpression")
+        Logger.d(TAG, "onAdImpression")
     }
 
     override fun onAdLoadFailed(p0: Throwable?) {
-        Log.d(TAG, "onAdLoadFailed")
+        Logger.d(TAG, "onAdLoadFailed")
     }
 
     override fun onAdClick() {
-        Log.d(TAG, "onAdClick")
+        Logger.d(TAG, "onAdClick")
     }
 
     override fun onAdLoaded() {
-        Log.d(TAG, "onAdLoaded")
+        Logger.d(TAG, "onAdLoaded")
         // render the banner
         banner.show();
     }
