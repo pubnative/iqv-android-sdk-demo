@@ -22,13 +22,16 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.navigation_banner, R.id.navigation_mrect, R.id.navigation_interstitial))
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_banner, R.id.navigation_mrect, R.id.navigation_interstitial
+            )
+        )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
 
-    fun initAdSdk() {
+    private fun initAdSdk() {
         AdSdk.initialize(
             "dde3c298b47648459f8ada4a982fa92d",
             "adsdkexample",
