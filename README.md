@@ -7,7 +7,7 @@
 
 Add PubNative Maven repo to your project level build.gradle file:
 
-```
+``` Groovy
 buildscript {
     repositories {
         // Other dependencies
@@ -28,7 +28,7 @@ allprojects {
 
 Add IQV SDK dependency to the module level build.gradle file:
 
-```
+``` Groovy
 dependencies {
    implementation 'com.iqv:iqv.adsdk:+'
 }
@@ -45,14 +45,14 @@ Place this file in your project and add it as a dependency.
 
 To enable the basic features of the IQV SDK, the following permissions must be added in the AndroidManifest.xml file:
 
-```
+``` XML
 <uses-permission android:name="android.permission.INTERNET" />
 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 ```
 
 For improved targeting and therefore higher eCPMs you can add this other permissions but keep in mind that the user needs to approve them explicitly on Android versions 6 or higher.
 
-```
+``` XML
 <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
 <!-- For location use one of the following permissions -->
@@ -65,7 +65,7 @@ For improved targeting and therefore higher eCPMs you can add this other permiss
 
 On your main Activity or your Application class onCreate method you should initialise the SDK using the app token and partner keyword that were provided to you by your account manager.
 
-```
+``` Kotlin
 AdSdk.initialize(
             APP_TOKEN,
             PARTNER_KEYWORD,
@@ -73,6 +73,17 @@ AdSdk.initialize(
         ) {
             // Your custom code after AdSdk has been initialised
         }
+```
+
+## SDK reconfiguration at runtime
+Similarly to the initialize function, the reconfigure method can be used to change the SDK settings at runtime
+
+``` Kotlin
+AdSdk.reconfigure(
+            APP_TOKEN,
+            PARTNER_KEYWORD,
+            this.application
+        )
 ```
 
 ## Advanced configurations
@@ -90,7 +101,7 @@ During development and testing of the SDK integration it is recommended to enabl
 
 Test mode is disabled by default. To enable test mode, you should use this line in the same location where you initialise the SDK:
 
-```
+``` Kotlin
 AdSdk.setTestMode(true)
 ```
 
@@ -99,7 +110,7 @@ You can add extra information to the requests the SDK makes to the ad server. Th
 
 You can set the age, gender and some related keywords that can help improve the audience targeting in the delivered ads.
 
-```
+``` Kotlin
 AdSdk.setCoppaEnabled(false)
 AdSdk.setAge("30")
 AdSdk.setGender("male")
@@ -114,7 +125,7 @@ AdSdk.setKeywords("sports,racket,tennis")
 
 Create a BannerAdView inside your layout file
 
-```
+``` XML
 <com.iqv.views.AdView
         android:id="@+id/p_banner"
         android:layout_width="320dp"
@@ -128,45 +139,41 @@ Create a BannerAdView inside your layout file
 
 Create an attribute to hold the reference to the UI element.
 
-```
-private AdView banner;
+``` Kotlin
+private lateinit var banner: AdView
 ```
 
 Get a reference to it from your code.
 
-```
-        banner = view.findViewById(R.id.banner)
+``` Kotlin
+        banner = view.findViewById(R.id.p_banner)
 ```
 
 ### Requesting and displaying the ad
 Use the load method to request an ad. You can set a listener for the banner.
 Before loading you can define the desired size. Various banner and MRECT formats are supported.
 
-```
-private void loadBanner() {
+``` Kotlin
+private fun loadBanner() {
     // supported sizes are currently 300x250, 320x50, 320x100, 728x90
-    mBanner.setAdSize(AdSize.SIZE_320x50)
-    mBanner.load(new AdView.Listener() {
-        @Override
-        public void onAdLoaded() {
+    banner.setAdSize(AdSize.SIZE_320x50)
+    banner.load(object : AdView.Listener {
+        override fun onAdLoaded() {
 
         }
 
-        @Override
-        public void onAdLoadFailed(Throwable error) {
+        override fun onAdImpression() {
 
         }
 
-        @Override
-        public void onAdImpression() {
+        override fun onAdLoadFailed(p0: Throwable?) {
 
         }
 
-        @Override
-        public void onAdClick() {
+        override fun onAdClick() {
 
         }
-    });
+    })
 }
 ```
 
@@ -175,18 +182,82 @@ Any error during fetch or rendering will be received via the onAdLoadFailed call
 onAdImpression and onAdClick just notify of clicks and impressions. No code needs to be added there. Use those callbacks in case you want to hide the ad after click or some similar use case.
 
 Now you can show the ad by calling
-```
- banner.show();
+``` Kotlin
+banner.show()
 ```
 
 Finally destroy the banner when the activity or fragment are destroyed.
 
-```
+``` Kotlin
 override fun onDestroy() {
-        if (banner != null) {
-            banner.destroy()
-        }
-        super.onDestroy()
+    if (banner != null) {
+        banner.destroy()
     }
+    super.onDestroy()
+}
 ```
 
+## IQV Android SDK - Interstitials
+
+### Create **InterstitialAd** attribute in you activity or fragment
+
+``` Kotlin
+private lateinit var interstitial : InterstitialAd;
+```
+
+### Request the ad
+
+Create an instance of the interstitial object setting a **listener**. Use the **load** method to make an ad request.
+
+``` Kotlin
+private fun loadInterstitial() {
+    interstitial = InterstitialAd(this, object : InterstitialAd.Listener {
+        override fun onInterstitialLoaded() {
+
+        }
+
+        override fun onInterstitialLoadFailed(error: Throwable?) {
+
+        }
+
+        override fun onInterstitialImpression() {
+
+        }
+
+        override fun onInterstitialClick() {
+
+        }
+
+        override fun onInterstitialDismissed() {
+
+        }
+    })
+    interstitial.load()
+}
+```
+
+After the ad is successfully retrieved from the server, the **onInterstitialLoaded** callback will notify that the ad is ready to be displayed.
+You can display the interstitial as soon as it's loaded using after getting the callback. Use the **show** method to display the ad:
+
+``` Kotlin
+interstitial.show();
+```
+
+if you don't want to show the ad right away after being loaded, you can use the **isReady** method that returns a boolean stating if the ad has been loaded and is ready to be displayed.
+
+``` Kotlin
+if (interstitial.isReady()) {
+    interstitial.show()
+}
+```
+
+Finally destroy the interstitial when the activity or fragment are destroyed
+
+``` Kotlin
+override fun onDestroy() {
+    if (interstitial != null) {
+        interstitial.destroy()
+    }
+    super.onDestroy()
+}
+```

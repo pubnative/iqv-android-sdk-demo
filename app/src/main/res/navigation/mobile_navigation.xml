@@ -3,17 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_banner">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.iqv.demo.ui.banner.BannerAdFragment"
+        android:id="@+id/navigation_banner"
+        android:name="com.iqv.demo.ui.BannerAdFragment"
         android:label="@string/title_banner"
         tools:layout="@layout/fragment_banner" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.iqv.demo.ui.mrect.MRectFragment"
+        android:id="@+id/navigation_mrect"
+        android:name="com.iqv.demo.ui.MRectAdFragment"
         android:label="@string/title_mrect"
         tools:layout="@layout/fragment_mrect" />
+
+    <fragment
+        android:id="@+id/navigation_interstitial"
+        android:name="com.iqv.demo.ui.InterstitialAdFragment"
+        android:label="@string/title_interstitial"
+        tools:layout="@layout/fragment_interstitial" />
 </navigation>
