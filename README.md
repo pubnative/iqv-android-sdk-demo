@@ -37,7 +37,7 @@ dependencies {
 ## Install as a manual dependency
 
 You can download the most recent .aar file of IQV SDK from our bintray repository:
-https://bintray.com/pubnative/maven/iqv.adsdk.beta/#files/com%2Fiqv%2Fiqv.adsdk%2F0.8.1-verve.1521
+https://bintray.com/pubnative/maven/iqv.adsdk
 
 Place this file in your project and add it as a dependency.
 
