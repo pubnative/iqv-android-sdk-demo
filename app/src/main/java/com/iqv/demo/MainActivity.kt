@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
     private fun initAdSdk() {
         AdSdk.initialize(
             "dde3c298b47648459f8ada4a982fa92d",
-            "adsdkexample",
+            "adsdksponsor",
             this.application
         ) {
             // AdSdk has been initialised
