@@ -19,7 +19,7 @@
             android:layout_marginBottom="20dp"
             android:text="@string/load_button" />
 
-        <com.iqv.views.AdView
+        <net.pubnative.lite.sdk.views.HyBidAdView
             android:id="@+id/mrect"
             android:layout_width="300dp"
             android:layout_height="250dp"
