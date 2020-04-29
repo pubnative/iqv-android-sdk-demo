@@ -43,5 +43,7 @@ class MainActivity : AppCompatActivity() {
         HyBid.setCoppaEnabled(false)
         HyBid.setAge("30")
         HyBid.setGender("male")
+
+        HyBid.getUserDataManager().setIABUSPrivacyString(this, "1YYN")
     }
 }

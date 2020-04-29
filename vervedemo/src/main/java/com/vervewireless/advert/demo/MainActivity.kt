@@ -39,5 +39,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         HyBid.setTestMode(true)
+        VerveAdSDK.setIABUSPrivacyString(this, "1YYN")
     }
 }
