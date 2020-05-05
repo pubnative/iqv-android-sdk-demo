@@ -20,7 +20,7 @@
             android:layout_marginBottom="20dp"
             android:text="@string/load_button" />
 
-        <net.pubnative.lite.sdk.views.HyBidAdView
+        <com.vervewireless.advert.AdView
             android:id="@+id/banner"
             android:layout_width="320dp"
             android:layout_height="50dp"

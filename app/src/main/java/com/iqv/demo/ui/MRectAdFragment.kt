@@ -1,26 +1,26 @@
 package com.iqv.demo.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.iqv.demo.R
-import com.iqv.models.AdSize
-import com.iqv.utils.Logger
-import com.iqv.views.AdView
+import net.pubnative.lite.sdk.models.AdSize
+import net.pubnative.lite.sdk.views.HyBidAdView
 
-class MRectAdFragment : Fragment(), AdView.Listener {
+class MRectAdFragment : Fragment(), HyBidAdView.Listener {
 
     val TAG = MRectAdFragment::class.java.simpleName
-    private lateinit var banner: AdView
+    private lateinit var banner: HyBidAdView
     private lateinit var loadButton: Button
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ) = inflater.inflate(R.layout.fragment_mrect, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,24 +36,24 @@ class MRectAdFragment : Fragment(), AdView.Listener {
     fun loadAd() {
         // supported sizes are currently 300x250, 320x50, 320x100, 728x90
         banner.setAdSize(AdSize.SIZE_300x250)
-        banner.load(this)
+        banner.load("5",this)
     }
 
     // --------------- AdView Listener --------------------
     override fun onAdImpression() {
-        Logger.d(TAG, "onAdImpression")
+        Log.d(TAG, "onAdImpression")
     }
 
     override fun onAdLoadFailed(p0: Throwable?) {
-        Logger.d(TAG, "onAdLoadFailed")
+        Log.d(TAG, "onAdLoadFailed")
     }
 
     override fun onAdClick() {
-        Logger.d(TAG, "onAdClick")
+        Log.d(TAG, "onAdClick")
     }
 
     override fun onAdLoaded() {
-        Logger.d(TAG, "onAdLoaded")
+        Log.d(TAG, "onAdLoaded")
         // render the banner
         banner.show();
     }

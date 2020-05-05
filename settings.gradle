@@ -1,2 +1,3 @@
 rootProject.name='IQV demo'
 include ':app'
+include ':vervedemo'

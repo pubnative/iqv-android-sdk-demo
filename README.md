@@ -1,7 +1,7 @@
 # IQV Android SDK Integration and Configuration
 
 ## Requirements
-- You will be provided with a parameter set by your account manager. This consists of two string values for appToken and partnerKeyword.
+- You will be provided with a parameter set by your account manager. This consists of two string values for appToken and partnerKeyword, and the zone ids that identify each one of your placements.
 
 ## Install using Gradle dependency
 
@@ -30,14 +30,13 @@ Add IQV SDK dependency to the module level build.gradle file:
 
 ``` Groovy
 dependencies {
-   implementation 'com.iqv:iqv.adsdk:+'
+   implementation 'net.pubnative:hybid.sdk:0.8.2-iqv_sdk.1708'
 }
 ```
 
 ## Install as a manual dependency
 
-You can download the most recent .aar file of IQV SDK from our bintray repository:
-https://bintray.com/pubnative/maven/iqv.adsdk
+You can download the most recent .aar file of IQV SDK from our bintray [repository](https://dl.bintray.com/pubnative/maven/net/pubnative/hybid.sdk/0.8.2-iqv_sdk.1708/hybid.sdk-0.8.2-iqv_sdk.1708.aar).
 
 Place this file in your project and add it as a dependency.
 
@@ -66,11 +65,10 @@ For improved targeting and therefore higher eCPMs you can add this other permiss
 On your main Activity or your Application class onCreate method you should initialise the SDK using the app token and partner keyword that were provided to you by your account manager.
 
 ``` Kotlin
-AdSdk.initialize(
+HyBid.initialize(
             APP_TOKEN,
             PARTNER_KEYWORD,
-            this.application
-        ) {
+            applicationContext) {
             // Your custom code after AdSdk has been initialised
         }
 ```
@@ -79,10 +77,10 @@ AdSdk.initialize(
 Similarly to the initialize function, the reconfigure method can be used to change the SDK settings at runtime
 
 ``` Kotlin
-AdSdk.reconfigure(
+HyBid.reconfigure(
             APP_TOKEN,
             PARTNER_KEYWORD,
-            this.application
+            applicationContext
         )
 ```
 
@@ -93,7 +91,8 @@ If you are using Proguard in your gradle build, you should add these lines to yo
 
 ```
 -keepattributes Signature
--keep class com.iqv.** { *; }
+-keep class net.pubnative.** { *; }
+-keep class com.vervewireless.advert.** { *; }
 ```
 
 ### Test mode
@@ -102,7 +101,7 @@ During development and testing of the SDK integration it is recommended to enabl
 Test mode is disabled by default. To enable test mode, you should use this line in the same location where you initialise the SDK:
 
 ``` Kotlin
-AdSdk.setTestMode(true)
+HyBid.setTestMode(true)
 ```
 
 ### Targeting parameters
@@ -111,22 +110,22 @@ You can add extra information to the requests the SDK makes to the ad server. Th
 You can set the age, gender and some related keywords that can help improve the audience targeting in the delivered ads.
 
 ``` Kotlin
-AdSdk.setCoppaEnabled(false)
-AdSdk.setAge("30")
-AdSdk.setGender("male")
-AdSdk.setKeywords("sports,racket,tennis")
+HyBid.setCoppaEnabled(false)
+HyBid.setAge("30")
+HyBid.setGender("male")
+HyBid.setKeywords("sports,racket,tennis")
 ```
 
 ## IQV Android SDK - Banners and MRECT
 
 ### Create XML Layout
 
-**Please note: The class name of the AdView has changed from previous IQV SDK versions. Please only use com.iqv.views.AdView in your project**
+**Please note: The class name of the HyBidAdView has changed from previous IQV SDK versions. Please only use net.pubnative.lite.sdk.views.HyBidAdView in your project**
 
-Create a BannerAdView inside your layout file
+Create a HyBidAdView inside your layout file
 
 ``` XML
-<com.iqv.views.AdView
+<net.pubnative.lite.sdk.views.HyBidAdView
         android:id="@+id/p_banner"
         android:layout_width="320dp"
         android:layout_height="50dp"
@@ -140,7 +139,7 @@ Create a BannerAdView inside your layout file
 Create an attribute to hold the reference to the UI element.
 
 ``` Kotlin
-private lateinit var banner: AdView
+private lateinit var banner: HyBidAdView
 ```
 
 Get a reference to it from your code.
@@ -157,7 +156,7 @@ Before loading you can define the desired size. Various banner and MRECT formats
 private fun loadBanner() {
     // supported sizes are currently 300x250, 320x50, 320x100, 728x90
     banner.setAdSize(AdSize.SIZE_320x50)
-    banner.load(object : AdView.Listener {
+    banner.load(ZONE_ID, object : AdView.Listener {
         override fun onAdLoaded() {
 
         }
@@ -166,7 +165,7 @@ private fun loadBanner() {
 
         }
 
-        override fun onAdLoadFailed(p0: Throwable?) {
+        override fun onAdLoadFailed(error: Throwable?) {
 
         }
 
@@ -199,10 +198,10 @@ override fun onDestroy() {
 
 ## IQV Android SDK - Interstitials
 
-### Create **InterstitialAd** attribute in you activity or fragment
+### Create **HyBidInterstitialAd** attribute in you activity or fragment
 
 ``` Kotlin
-private lateinit var interstitial : InterstitialAd;
+private lateinit var interstitial : HyBidInterstitialAd;
 ```
 
 ### Request the ad
@@ -211,7 +210,7 @@ Create an instance of the interstitial object setting a **listener**. Use the **
 
 ``` Kotlin
 private fun loadInterstitial() {
-    interstitial = InterstitialAd(this, object : InterstitialAd.Listener {
+    interstitial = HyBidInterstitialAd(this, ZONE_ID, object : HyBidInterstitialAd.Listener {
         override fun onInterstitialLoaded() {
 
         }

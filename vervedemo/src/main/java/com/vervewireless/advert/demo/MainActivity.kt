@@ -1,4 +1,4 @@
-package com.iqv.demo
+package com.vervewireless.advert.demo
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.vervewireless.advert.VerveAdSDK
 import net.pubnative.lite.sdk.HyBid
 import net.pubnative.lite.sdk.utils.Logger
 
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun initAdSdk() {
-        HyBid.initialize(
+        VerveAdSDK.initialize(
             "dde3c298b47648459f8ada4a982fa92d",
             "adsdksponsor",
             this.application
@@ -37,13 +38,7 @@ class MainActivity : AppCompatActivity() {
             // AdSdk has been initialised
         }
 
-        HyBid.setLogLevel(Logger.Level.debug)
-
         HyBid.setTestMode(true)
-        HyBid.setCoppaEnabled(false)
-        HyBid.setAge("30")
-        HyBid.setGender("male")
-
-        HyBid.getUserDataManager().setIABUSPrivacyString(this, "1YYN")
+        VerveAdSDK.setIABUSPrivacyString(this, "1YYN")
     }
 }
