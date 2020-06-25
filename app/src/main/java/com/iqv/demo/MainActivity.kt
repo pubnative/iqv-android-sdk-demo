@@ -44,6 +44,6 @@ class MainActivity : AppCompatActivity() {
         HyBid.setAge("30")
         HyBid.setGender("male")
 
-        HyBid.getUserDataManager().setIABUSPrivacyString(this, "1YYN")
+        HyBid.getUserDataManager().iabusPrivacyString = "1YYN"
     }
 }
