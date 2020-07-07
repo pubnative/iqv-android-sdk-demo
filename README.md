@@ -3,6 +3,13 @@
 ## Requirements
 - You will be provided with a parameter set by your account manager. This consists of two string values for appToken and partnerKeyword, and the zone ids that identify each one of your placements.
 
+Default Zone IDs are defined as follows:
+2 - Banner Ads
+3 - Interstitial Ads
+4 - Video Ads
+
+- Your account manager can advise on more customized zone id setup including multiple price floors for the same ad format.
+
 ## Install using Gradle dependency
 
 Add PubNative Maven repo to your project level build.gradle file:
@@ -30,13 +37,13 @@ Add IQV SDK dependency to the module level build.gradle file:
 
 ``` Groovy
 dependencies {
-   implementation 'net.pubnative:hybid.sdk:0.8.2-iqv_sdk.1708'
+   implementation 'net.pubnative:hybid.sdk:0.11.0-iqv_sdk.2112'
 }
 ```
 
 ## Install as a manual dependency
 
-You can download the most recent .aar file of IQV SDK from our bintray [repository](https://dl.bintray.com/pubnative/maven/net/pubnative/hybid.sdk/0.8.2-iqv_sdk.1708/hybid.sdk-0.8.2-iqv_sdk.1708.aar).
+You can download the most recent .aar file of IQV SDK from our bintray [repository](https://dl.bintray.com/pubnative/maven/net/pubnative/hybid.sdk/0.11.0-iqv_sdk.2112/hybid.sdk-0.11.0-iqv_sdk.2112.aar).
 
 Place this file in your project and add it as a dependency.
 

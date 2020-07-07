@@ -24,7 +24,10 @@ class InterstitialAdFragment : Fragment(), HyBidInterstitialAd.Listener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadButton = view.findViewById(R.id.button_load)
-        interstitial = HyBidInterstitialAd(context, "3", this)
+        // Default Zone ID parameters are:
+        // 3 - Interstitial Ads
+        // 4 - Video Ads
+        interstitial = HyBidInterstitialAd(context, "4", this)
 
         loadButton.setOnClickListener {
             loadAd()
