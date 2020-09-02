@@ -1,12 +1,14 @@
 # IQV Android SDK Integration and Configuration
 
 ## Requirements
-- You will be provided with a parameter set by your account manager. This consists of two string values for appToken and partnerKeyword, and the zone ids that identify each one of your placements.
+- Your account manager will provide you with an appToken and the zone ids that identify each of your placements and ad formats.
 
-Default Zone IDs are defined as follows:
+Default Zone IDs used in the example app are defined as follows:
 2 - Banner Ads
 3 - Interstitial Ads
 4 - Video Ads
+
+Please note that the previously provided "partnerKeyword" parameter is no longer necessary and has been removed from the code.
 
 - Your account manager can advise on more customized zone id setup including multiple price floors for the same ad format.
 
