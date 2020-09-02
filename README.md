@@ -45,9 +45,11 @@ dependencies {
 
 ## Install as a manual dependency
 
-You can download the most recent .aar file of IQV SDK from our bintray [repository](https://dl.bintray.com/pubnative/maven/net/pubnative/hybid.sdk/1.5.3/hybid.sdk-1.5.3.aar).
+You can download the most recent .aar files of IQV SDK from our bintray repository:
+[hybid.sdk-1.5.3.aar](https://dl.bintray.com/pubnative/maven/net/pubnative/hybid.sdk/1.5.3/hybid.sdk-1.5.3.aar)
+[hybid.omsdk-1.3.10.aar](https://bintray.com/pubnative/maven/download_file?file_path=net%2Fpubnative%2Fhybid.omsdk%2F1.3.10%2Fhybid.omsdk-1.3.10.aar)
 
-Place this file in your project and add it as a dependency.
+Please ensure that you download both aar files, place them in your project and add as a dependency.
 
 ## Manifest permissions
 
