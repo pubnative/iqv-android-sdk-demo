@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() {
     fun initAdSdk() {
         HyBid.initialize(
             "dde3c298b47648459f8ada4a982fa92d",
-            "adsdksponsor",
             this.application
         ) {
             // AdSdk has been initialised

@@ -34,7 +34,7 @@ class InterstitialAdFragment : Fragment(), HyBidInterstitialAd.Listener {
         }
     }
 
-    fun loadAd() {
+    private fun loadAd() {
         interstitial.load()
     }
 

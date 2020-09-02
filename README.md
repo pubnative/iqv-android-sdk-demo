@@ -37,13 +37,13 @@ Add IQV SDK dependency to the module level build.gradle file:
 
 ``` Groovy
 dependencies {
-   implementation 'net.pubnative:hybid.sdk:0.11.0-iqv_sdk.2112'
+   implementation 'net.pubnative:hybid.sdk:1.5.3'
 }
 ```
 
 ## Install as a manual dependency
 
-You can download the most recent .aar file of IQV SDK from our bintray [repository](https://dl.bintray.com/pubnative/maven/net/pubnative/hybid.sdk/0.11.0-iqv_sdk.2112/hybid.sdk-0.11.0-iqv_sdk.2112.aar).
+You can download the most recent .aar file of IQV SDK from our bintray [repository](https://dl.bintray.com/pubnative/maven/net/pubnative/hybid.sdk/1.5.3/hybid.sdk-1.5.3.aar).
 
 Place this file in your project and add it as a dependency.
 
@@ -69,12 +69,11 @@ For improved targeting and therefore higher eCPMs you can add this other permiss
 
 ## SDK initialisation
 
-On your main Activity or your Application class onCreate method you should initialise the SDK using the app token and partner keyword that were provided to you by your account manager.
+On your main Activity or your Application class onCreate method you should initialise the SDK using the app token that was provided to you by your account manager.
 
 ``` Kotlin
 HyBid.initialize(
             APP_TOKEN,
-            PARTNER_KEYWORD,
             applicationContext) {
             // Your custom code after AdSdk has been initialised
         }
@@ -86,7 +85,6 @@ Similarly to the initialize function, the reconfigure method can be used to chan
 ``` Kotlin
 HyBid.reconfigure(
             APP_TOKEN,
-            PARTNER_KEYWORD,
             applicationContext
         )
 ```
