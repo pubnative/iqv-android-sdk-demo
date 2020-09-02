@@ -45,5 +45,5 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
 
-    implementation 'net.pubnative:hybid.sdk:1.5.2-iqv_interface.2462'
+    implementation 'net.pubnative:hybid.sdk:1.5.3'
 }
