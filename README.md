@@ -1,12 +1,14 @@
 # IQV Android SDK Integration and Configuration
 
 ## Requirements
-- You will be provided with a parameter set by your account manager. This consists of two string values for appToken and partnerKeyword, and the zone ids that identify each one of your placements.
+- Your account manager will provide you with an appToken and the zone ids that identify each of your placements and ad formats.
 
-Default Zone IDs are defined as follows:
+Default Zone IDs used in the example app are defined as follows:
 2 - Banner Ads
 3 - Interstitial Ads
 4 - Video Ads
+
+Please note that the previously provided "partnerKeyword" parameter is no longer necessary and has been removed from the code.
 
 - Your account manager can advise on more customized zone id setup including multiple price floors for the same ad format.
 
@@ -43,9 +45,11 @@ dependencies {
 
 ## Install as a manual dependency
 
-You can download the most recent .aar file of IQV SDK from our bintray [repository](https://dl.bintray.com/pubnative/maven/net/pubnative/hybid.sdk/1.5.3/hybid.sdk-1.5.3.aar).
+You can download the most recent .aar files of IQV SDK from our bintray repository:
+[hybid.sdk-1.5.3.aar](https://dl.bintray.com/pubnative/maven/net/pubnative/hybid.sdk/1.5.3/hybid.sdk-1.5.3.aar)
+[hybid.omsdk-1.3.10.aar](https://bintray.com/pubnative/maven/download_file?file_path=net%2Fpubnative%2Fhybid.omsdk%2F1.3.10%2Fhybid.omsdk-1.3.10.aar)
 
-Place this file in your project and add it as a dependency.
+Please ensure that you download both aar files, place them in your project and add as a dependency.
 
 ## Manifest permissions
 
