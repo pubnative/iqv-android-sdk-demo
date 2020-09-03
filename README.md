@@ -161,6 +161,7 @@ Before loading you can define the desired size. Various banner and MRECT formats
 private fun loadBanner() {
     // supported sizes are currently 300x250, 320x50, 320x100, 728x90
     banner.setAdSize(AdSize.SIZE_320x50)
+    banner.autoShowOnLoad = false
     banner.load(ZONE_ID, object : AdView.Listener {
         override fun onAdLoaded() {
 

@@ -36,6 +36,7 @@ class MRectAdFragment : Fragment(), HyBidAdView.Listener {
     private fun loadAd() {
         // supported sizes are currently 300x250, 320x50, 320x100, 728x90
         banner.setAdSize(AdSize.SIZE_300x250)
+        banner.autoShowOnLoad = false
         banner.load("5",this)
     }
 
