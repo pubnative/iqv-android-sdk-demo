@@ -1,3 +1,0 @@
--keepattributes Signature
--keep class net.pubnative.** { *; }
--keep class com.vervewireless.advert.** { *; }

@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         AdSdk.setAge("30")
         AdSdk.setGender("male")
 
-        AdSdk.getUserDataManager().iabusPrivacyString = "1YYN"
+        //This is optional. The SDK automatically picks up CCPA settings from shared user preferences
+        //AdSdk.getUserDataManager().iabusPrivacyString = "1YYN"
     }
 }

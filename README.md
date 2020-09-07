@@ -13,43 +13,11 @@ Please note that the previously provided "partnerKeyword" parameter is no longer
 - Your account manager can advise on more customized zone id setup including multiple price floors for the same ad format.
 
 ## Install using Gradle dependency
-
-Add PubNative Maven repo to your project level build.gradle file:
-
-``` Groovy
-buildscript {
-    repositories {
-        // Other dependencies
-        maven { url 'https://dl.bintray.com/pubnative/maven' }
-    }
-    dependencies {
-        // ...
-    }
-}
-
-allprojects {
-    repositories {
-        // Other dependencies
-        maven { url 'https://dl.bintray.com/pubnative/maven' }
-    }
-}
-```
-
-Add IQV SDK dependency to the module level build.gradle file:
-
-``` Groovy
-dependencies {
-   implementation 'net.pubnative:hybid.sdk:1.5.4'
-}
-```
+this SDK version is designed for manual dependency integration. Please contact us if you prefer gradle dependency management.
 
 ## Install as a manual dependency
 
-You can download the most recent .aar files of IQV SDK from our bintray repository:
-[hybid.sdk-1.5.3.aar](https://dl.bintray.com/pubnative/maven/net/pubnative/hybid.sdk/1.5.3/hybid.sdk-1.5.3.aar)
-[hybid.omsdk-1.3.10.aar](https://bintray.com/pubnative/maven/download_file?file_path=net%2Fpubnative%2Fhybid.omsdk%2F1.3.10%2Fhybid.omsdk-1.3.10.aar)
-
-Please ensure that you download both aar files, place them in your project and add as a dependency.
+Please take all files in the /app/libs directory, place them in your project and add as a dependency.
 
 ## Manifest permissions
 
@@ -76,7 +44,7 @@ For improved targeting and therefore higher eCPMs you can add this other permiss
 On your main Activity or your Application class onCreate method you should initialise the SDK using the app token that was provided to you by your account manager.
 
 ``` Kotlin
-HyBid.initialize(
+AdSdk.initialize(
             APP_TOKEN,
             applicationContext) {
             // Your custom code after AdSdk has been initialised
@@ -87,7 +55,7 @@ HyBid.initialize(
 Similarly to the initialize function, the reconfigure method can be used to change the SDK settings at runtime
 
 ``` Kotlin
-HyBid.reconfigure(
+AdSdk.reconfigure(
             APP_TOKEN,
             applicationContext
         )
@@ -100,8 +68,7 @@ If you are using Proguard in your gradle build, you should add these lines to yo
 
 ```
 -keepattributes Signature
--keep class net.pubnative.** { *; }
--keep class com.vervewireless.advert.** { *; }
+-keep class com.iqv.** { *; }
 ```
 
 ### Test mode
@@ -110,7 +77,7 @@ During development and testing of the SDK integration it is recommended to enabl
 Test mode is disabled by default. To enable test mode, you should use this line in the same location where you initialise the SDK:
 
 ``` Kotlin
-HyBid.setTestMode(true)
+AdSdk.setTestMode(true)
 ```
 
 ### Targeting parameters
@@ -119,22 +86,20 @@ You can add extra information to the requests the SDK makes to the ad server. Th
 You can set the age, gender and some related keywords that can help improve the audience targeting in the delivered ads.
 
 ``` Kotlin
-HyBid.setCoppaEnabled(false)
-HyBid.setAge("30")
-HyBid.setGender("male")
-HyBid.setKeywords("sports,racket,tennis")
+AdSdk.setCoppaEnabled(false)
+AdSdk.setAge("30")
+AdSdk.setGender("male")
+AdSdk.setKeywords("sports,racket,tennis")
 ```
 
 ## IQV Android SDK - Banners and MRECT
 
 ### Create XML Layout
 
-**Please note: The class name of the HyBidAdView has changed from previous IQV SDK versions. Please only use net.pubnative.lite.sdk.views.HyBidAdView in your project**
-
-Create a HyBidAdView inside your layout file
+Create an AdView inside your layout file
 
 ``` XML
-<net.pubnative.lite.sdk.views.HyBidAdView
+<com.iqv.views.AdView
         android:id="@+id/p_banner"
         android:layout_width="320dp"
         android:layout_height="50dp"
@@ -148,7 +113,7 @@ Create a HyBidAdView inside your layout file
 Create an attribute to hold the reference to the UI element.
 
 ``` Kotlin
-private lateinit var banner: HyBidAdView
+private lateinit var banner: AdView
 ```
 
 Get a reference to it from your code.
@@ -208,10 +173,10 @@ override fun onDestroy() {
 
 ## IQV Android SDK - Interstitials
 
-### Create **HyBidInterstitialAd** attribute in you activity or fragment
+### Create **InterstitialAd** attribute in you activity or fragment
 
 ``` Kotlin
-private lateinit var interstitial : HyBidInterstitialAd;
+private lateinit var interstitial : com.iqv.interstitial.InterstitialAd;
 ```
 
 ### Request the ad
@@ -220,7 +185,7 @@ Create an instance of the interstitial object setting a **listener**. Use the **
 
 ``` Kotlin
 private fun loadInterstitial() {
-    interstitial = HyBidInterstitialAd(this, ZONE_ID, object : HyBidInterstitialAd.Listener {
+    interstitial = com.iqv.interstitial.InterstitialAd(this, ZONE_ID, object : com.iqv.interstitial.InterstitialAd.Listener {
         override fun onInterstitialLoaded() {
 
         }
