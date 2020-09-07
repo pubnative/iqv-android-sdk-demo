@@ -7,8 +7,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import net.pubnative.lite.sdk.HyBid
-import net.pubnative.lite.sdk.utils.Logger
+import com.iqv.AdSdk
+import com.iqv.utils.Logger
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,20 +29,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun initAdSdk() {
-        HyBid.initialize(
+        AdSdk.initialize(
             "dde3c298b47648459f8ada4a982fa92d",
             this.application
         ) {
             // AdSdk has been initialised
         }
 
-        HyBid.setLogLevel(Logger.Level.debug)
+        AdSdk.setLogLevel(Logger.Level.debug)
 
-        HyBid.setTestMode(true)
-        HyBid.setCoppaEnabled(false)
-        HyBid.setAge("30")
-        HyBid.setGender("male")
+        AdSdk.setTestMode(true)
+        AdSdk.setCoppaEnabled(false)
+        AdSdk.setAge("30")
+        AdSdk.setGender("male")
 
-        HyBid.getUserDataManager().iabusPrivacyString = "1YYN"
+        AdSdk.getUserDataManager().iabusPrivacyString = "1YYN"
     }
 }

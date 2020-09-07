@@ -8,12 +8,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.iqv.demo.R
-import net.pubnative.lite.sdk.interstitial.HyBidInterstitialAd
+import com.iqv.interstitial.InterstitialAd
 
-class InterstitialAdFragment : Fragment(), HyBidInterstitialAd.Listener {
+class InterstitialAdFragment : Fragment(), InterstitialAd.Listener {
     val TAG = InterstitialAdFragment::class.java.simpleName
     private lateinit var loadButton: Button
-    private lateinit var interstitial: HyBidInterstitialAd
+    private lateinit var interstitial: InterstitialAd
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,7 +27,7 @@ class InterstitialAdFragment : Fragment(), HyBidInterstitialAd.Listener {
         // Default Zone ID parameters are:
         // 3 - Interstitial Ads
         // 4 - Video Ads
-        interstitial = HyBidInterstitialAd(context, "4", this)
+        interstitial = InterstitialAd(context, "4", this)
 
         loadButton.setOnClickListener {
             loadAd()

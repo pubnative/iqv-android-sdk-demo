@@ -8,13 +8,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.iqv.demo.R
-import net.pubnative.lite.sdk.models.AdSize
-import net.pubnative.lite.sdk.views.HyBidAdView
+import com.iqv.models.AdSize
+import com.iqv.views.AdView
 
-class MRectAdFragment : Fragment(), HyBidAdView.Listener {
+class MRectAdFragment : Fragment(), AdView.Listener {
 
     val TAG = MRectAdFragment::class.java.simpleName
-    private lateinit var banner: HyBidAdView
+    private lateinit var banner: AdView
     private lateinit var loadButton: Button
 
     override fun onCreateView(
