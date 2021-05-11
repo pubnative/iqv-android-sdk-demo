@@ -9,6 +9,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.iqv.AdSdk
 import com.iqv.utils.Logger
+import com.iqv.vpaid.enums.AudioState
 
 class MainActivity : AppCompatActivity() {
 
@@ -40,8 +41,12 @@ class MainActivity : AppCompatActivity() {
 
         AdSdk.setTestMode(true)
         AdSdk.setCoppaEnabled(false)
-        AdSdk.setAge("30")
-        AdSdk.setGender("male")
+        // Allow video ads to be skipped after 15s
+        AdSdk.setInterstitialSkipOffset(15)
+        // Start all video ads muted
+        AdSdk.setVideoAudioStatus(AudioState.MUTED)
+        // AdSdk.setAge("30")
+        // AdSdk.setGender("male")
 
         //This is optional. The SDK automatically picks up CCPA settings from shared user preferences
         //AdSdk.getUserDataManager().iabusPrivacyString = "1YYN"
