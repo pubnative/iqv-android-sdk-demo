@@ -235,3 +235,26 @@ override fun onDestroy() {
     super.onDestroy()
 }
 ```
+
+### Skippable ads
+By default the advertiser defines if and when an interstitial video ad may be skippable.
+However as a publisher you can define a minimum time that a video must be played before the user is given the option to skip the video regardless.
+PLease be aware that short skip offset times lead to reduced VTR (view through rate) KPIs that may negatively impact generated revenue.
+
+```
+// make every video ad skippable after 15 seconds
+AdSdk.setInterstitialSkipOffset(15)
+```
+
+### Audio Controls / Mute
+If you do not change this option, then by default all video ads start playing with audio muted. 
+As a publisher you can define a different behaviour:
+
+```
+// Valid options for audio status are:
+// MUTED   -- Videos always start muted (standard behaviour if no option is set)
+// ON  -- Videos always play with audio
+// Default -- Video play muted if the device is in silent mode, otherwise videos play with audio
+//
+AdSdk.setVideoAudioStatus(AudioState.Default)
+```
