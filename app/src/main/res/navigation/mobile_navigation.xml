@@ -22,4 +22,10 @@
         android:name="com.iqv.demo.ui.InterstitialAdFragment"
         android:label="@string/title_interstitial"
         tools:layout="@layout/fragment_interstitial" />
+
+    <fragment
+        android:id="@+id/navigation_rewarded"
+        android:name="com.iqv.demo.ui.RewardedAdFragment"
+        android:label="@string/title_rewarded"
+        tools:layout="@layout/fragment_rewarded" />
 </navigation>

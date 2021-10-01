@@ -3,6 +3,7 @@
     <string name="title_banner">Banner</string>
     <string name="title_mrect">MRect</string>
     <string name="title_interstitial">Interstitial</string>
+    <string name="title_rewarded">Rewarded</string>
     <string name="title_notifications">Notifications</string>
     <string name="load_button">Load</string>
     <string name="creative_id">Creative Id</string>
